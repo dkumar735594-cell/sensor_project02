@@ -9,7 +9,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 from src.constant import *
-from src.exception import CustomExcepton
+from src.exception import CustomException
 from src.logger import logging
 from src.utils.main_utils import MainUtils
 from dataclasses import dataclass
@@ -42,7 +42,7 @@ class DataTransformation:
 
             return data
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
     def get_data_transformer_object(self):
 
@@ -59,7 +59,7 @@ class DataTransformation:
 
             return preprocessor
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
     def initiate_data_transformation(self):
 
@@ -83,10 +83,10 @@ class DataTransformation:
             
             self.utils.save_object(file_path= preprocessor_path, obj= preprocessor)
 
-            train_arr = np.c[X_train_scaled, np.array(y_train)]
-            test_arr = np.c[X_test_scaled, np.array(y_test)]
+            train_arr = np.c_[X_train_scaled, np.array(y_train)]
+            test_arr = np.c_[X_test_scaled, np.array(y_test)]
 
             return (train_arr,test_arr,preprocessor_path)
         except Exception as e:
-            raise CustomExcepton(e,sys) from e
+            raise CustomException(e,sys) from e
         

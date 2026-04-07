@@ -4,7 +4,7 @@ import shutil
 import pandas as pd
 import pickle
 from src.logger import logging
-from src.exception import CustomExcepton
+from src.exception import CustomException
 from flask import request
 from src.constant  import *
 from src.utils.main_utils import MainUtils
@@ -40,7 +40,7 @@ class PredictionPipeline:
 
             return pred_file_path
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
     def predict(self, feature):
 
@@ -55,7 +55,7 @@ class PredictionPipeline:
 
             return preds
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
 
     def get_predicted_dataframe(self, input_dataframe_path: pd.DataFrame):
@@ -81,7 +81,7 @@ class PredictionPipeline:
             logging.info("prediction completed")
 
         except Exception as e:
-            raise CustomExcepton(e,sys) from e
+            raise CustomException(e,sys) from e
         
     def run_pipeline(self):
         try:
@@ -90,6 +90,6 @@ class PredictionPipeline:
 
             return self.prediction_pipeline_config
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
         

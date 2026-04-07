@@ -4,7 +4,7 @@ import os
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
-from src.exception import CustomExcepton
+from src.exception import CustomException
 
 
 class TrainingPipeline:
@@ -15,7 +15,7 @@ class TrainingPipeline:
             feature_store_file_path = data_ingestion.initiate_data_ingestion()
             return feature_store_file_path
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
 
     def start_data_transformation(self, feature_store_file_path):
@@ -24,7 +24,7 @@ class TrainingPipeline:
             train_arr,test_arr,preprocessor_path = data_transformation.initiate_data_transformation
             return train_arr,test_arr,preprocessor_path
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
     def start_model_training(self, train_arr, test_arr):
         try:
@@ -34,7 +34,7 @@ class TrainingPipeline:
             )
             return model_score
         except Exception as e:
-            raise CustomExcepton(e, sys)
+            raise CustomException(e, sys)
         
     def run_pipeline(self):
         try:
@@ -45,5 +45,5 @@ class TrainingPipeline:
             print("training completated. Trained model score:", r2_square)
 
         except Exception as e:
-            raise CustomExcepton(e,sys)
+            raise CustomException(e,sys)
         
